@@ -1,7 +1,8 @@
 import React, { Component, useState } from "react";
-import {Card, CardBody, CardImg, CardImgOverlay, CardText, CardTitle, Media} from "reactstrap";
+import {Card, CardBody, CardImg, CardImgOverlay, CardText, CardTitle, Col, Media} from "reactstrap";
 import Dish from "./shared/dish";
 import {DISHES} from "./shared/dishes";
+import Dishdetail from "./DishdetailComponent";
 
 type MenuState = {
     dishes: Dish[];
@@ -11,7 +12,7 @@ type MenuProps = {
     dish: Dish;
 };
 
-export default function Menu() {
+export default function Menu(): any {
     const [dishes, setDishes] = useState(DISHES);
     const [selectedDish, setSelectedDish] = useState(null);
     const menu = dishes.map((dish) => {
@@ -31,31 +32,12 @@ export default function Menu() {
         setSelectedDish(dish);
     }
 
-    function renderDish(dish: Dish | null) {
-        if (dish != null) {
-            return (
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-            );
-        }
-        return (<div></div>);
-    }
-
     return (
         <div className="container">
             <div className="row">
                 {menu}
             </div>
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                    {renderDish(selectedDish)}
-                </div>
-            </div>
+            <Dishdetail dish={selectedDish} />
         </div>
     );
 }

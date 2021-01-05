@@ -1,3 +1,5 @@
+import Comment from "./comment";
+
 export default class Dish {
     id: number | undefined;
     name: string | undefined;
@@ -6,4 +8,5 @@ export default class Dish {
     label: string | undefined;
     price: string | undefined;
     description: string | undefined;
+    comments: Comment[] | undefined;
 }
