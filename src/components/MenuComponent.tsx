@@ -1,43 +1,18 @@
-import React, { Component, useState } from "react";
-import {Card, CardBody, CardImg, CardImgOverlay, CardText, CardTitle, Col, Media} from "reactstrap";
+import React from "react";
+import {Card, CardImg, CardImgOverlay, CardTitle} from "reactstrap";
 import Dish from "./shared/dish";
-import {DISHES} from "./shared/dishes";
-import Dishdetail from "./DishdetailComponent";
 
-type MenuState = {
-    dishes: Dish[];
-};
-
-type MenuProps = {
-    dish: Dish;
-};
-
-export default function Menu(): any {
-    const [dishes, setDishes] = useState(DISHES);
-    const [selectedDish, setSelectedDish] = useState(null);
-    const menu = dishes.map((dish) => {
+export default function Menu(props: any): any {
+    const dishes: Dish[] = props.dishes;
+    return dishes.map((dish) => {
         return (
-            <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card onClick={() => onDishSelect(dish)}>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardImgOverlay>
-                        <CardTitle>{dish.name}</CardTitle>
-                    </CardImgOverlay>
-                </Card>
-            </div>
+            <Card key={dish.id} className="col-12 col-md-5 m-1"
+                onClick={() => props.onClick(dish.id)}>
+                <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardImgOverlay>
+                    <CardTitle>{dish.name}</CardTitle>
+                </CardImgOverlay>
+            </Card>
         );
     });
-
-    function onDishSelect(dish: any) {
-        setSelectedDish(dish);
-    }
-
-    return (
-        <div className="container">
-            <div className="row">
-                {menu}
-            </div>
-            <Dishdetail dish={selectedDish} />
-        </div>
-    );
 }
