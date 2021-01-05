@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
-import { Media } from "reactstrap";
-import Dish from "./dish";
+import {Card, CardBody, CardImg, CardImgOverlay, CardText, CardTitle, Media} from "reactstrap";
+import Dish from "./shared/dish";
+import {DISHES} from "./shared/dishes";
 
 type MenuState = {
     dishes: Dish[];
@@ -10,70 +11,50 @@ type MenuProps = {
     dish: Dish;
 };
 
-const DATA: Dish[] = [
-    {
-        id: 0,
-        name: "Uthappizza",
-        image: "assets/images/uthappizza.png",
-        category: "mains",
-        label: "Hot",
-        price: "4.99",
-        description:
-            "A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.",
-    },
-    {
-        id: 1,
-        name: "Zucchipakoda",
-        image: "assets/images/zucchipakoda.png",
-        category: "appetizer",
-        label: "",
-        price: "1.99",
-        description:
-            "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
-    },
-    {
-        id: 2,
-        name: "Vadonut",
-        image: "assets/images/vadonut.png",
-        category: "appetizer",
-        label: "New",
-        price: "1.99",
-        description: "A quintessential ConFusion experience, is it a vada or is it a donut?",
-    },
-    {
-        id: 3,
-        name: "ElaiCheese Cake",
-        image: "assets/images/elaicheesecake.png",
-        category: "dessert",
-        label: "",
-        price: "2.99",
-        description:
-            "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms",
-    },
-];
-
 export default function Menu() {
-    const [dishes, setDishes] = useState(DATA);
+    const [dishes, setDishes] = useState(DISHES);
+    const [selectedDish, setSelectedDish] = useState(null);
     const menu = dishes.map((dish) => {
         return (
-            <div key={dish.id} className="col-12 mt-5">
-                <Media tag="li">
-                    <Media left middle>
-                        <Media object src={dish.image} alt={dish.name} />
-                    </Media>
-                    <Media body className="ml-5">
-                        <Media heading>{dish.name}</Media>
-                        <p>{dish.description}</p>
-                    </Media>
-                </Media>
+            <div key={dish.id} className="col-12 col-md-5 m-1">
+                <Card onClick={() => onDishSelect(dish)}>
+                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardImgOverlay>
+                        <CardTitle>{dish.name}</CardTitle>
+                    </CardImgOverlay>
+                </Card>
             </div>
         );
     });
 
+    function onDishSelect(dish: any) {
+        setSelectedDish(dish);
+    }
+
+    function renderDish(dish: Dish | null) {
+        if (dish != null) {
+            return (
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        }
+        return (<div></div>);
+    }
+
     return (
         <div className="container">
             <div className="row">
-                <Media list>{menu}</Media>
+                {menu}
+            </div>
+            <div className="row">
+                <div className="col-12 col-md-5 m-1">
+                    {renderDish(selectedDish)}
+                </div>
             </div>
         </div>
     );
