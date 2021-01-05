@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import {Container, Jumbotron, Navbar, NavbarBrand, Row} from "reactstrap";
 
 export default function Header() {
+
+    const [isNavOpen, setNavOpen] = useState(false);
+    function toggleNav() {
+        setNavOpen(!isNavOpen);
+    }
     return (
         <>
             <Navbar dark>
