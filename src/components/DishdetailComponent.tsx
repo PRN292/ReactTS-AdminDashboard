@@ -44,7 +44,7 @@ export default function Dishdetail(props: any) {
                         <CardTitle>
                             <h4>Comments</h4>
                         </CardTitle>
-                        <CardBody>{renderComments(dish.comments)}</CardBody>
+                        <CardBody></CardBody>
                     </Card>
                 </>
             );

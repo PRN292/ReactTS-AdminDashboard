@@ -1,10 +1,9 @@
-export default class Dish {
+export default class Leader {
     id: number;
     name: string;
     image: string;
-    category: string;
-    label: string;
-    price: string;
+    designation: string;
+    abbr: string;
     featured: boolean;
     description: string;
 
@@ -12,9 +11,8 @@ export default class Dish {
         this.id = 0;
         this.name = "";
         this.image = "";
-        this.category = "";
-        this.label = "";
-        this.price = "";
+        this.designation = "";
+        this.abbr = "";
         this.featured = false;
         this.description = "";
     }

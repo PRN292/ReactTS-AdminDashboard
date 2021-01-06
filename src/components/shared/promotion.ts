@@ -1,8 +1,7 @@
-export default class Dish {
+export default class Promotion {
     id: number;
     name: string;
     image: string;
-    category: string;
     label: string;
     price: string;
     featured: boolean;
@@ -12,7 +11,6 @@ export default class Dish {
         this.id = 0;
         this.name = "";
         this.image = "";
-        this.category = "";
         this.label = "";
         this.price = "";
         this.featured = false;
