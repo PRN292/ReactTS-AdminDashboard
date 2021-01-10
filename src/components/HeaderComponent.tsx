@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 import {
     Collapse,
     Jumbotron,
@@ -24,24 +25,24 @@ export default function Header() {
                     <Collapse isOpen={isNavOpen} navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLink className="nav-link" to="/home">
+                                <Link className="nav-link" to="/home">
                                     <span className="fa fa-home fa-lg" /> Home
-                                </NavLink>
+                                </Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/aboutus">
+                                <Link className="nav-link" to="/aboutus">
                                     <span className="fa fa-info fa-lg" /> About Us
-                                </NavLink>
+                                </Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/menu">
+                                <Link className="nav-link" to="/menu">
                                     <span className="fa fa-list fa-lg" /> Menu
-                                </NavLink>
+                                </Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/contactus">
+                                <Link className="nav-link" to="/contactus">
                                     <span className="fa fa-address-card fa-lg" /> Contact Us
-                                </NavLink>
+                                </Link>
                             </NavItem>
                         </Nav>
                     </Collapse>

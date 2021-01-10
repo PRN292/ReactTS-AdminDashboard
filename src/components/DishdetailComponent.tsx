@@ -1,15 +1,19 @@
 import React from "react";
 import Dish from "./shared/dish";
-import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
+import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle, Container, NavLink, Row} from "reactstrap";
 import Comment from "./shared/comment";
+import {Link} from "react-router-dom";
 
 export default function Dishdetail(props: any) {
     const dish: Dish = props.dish;
-    if (dish) {
-        return renderDish(dish);
+    const comments: Comment[] = props.comments;
+
+    if (dish && comments) {
+        return renderDish(dish, comments);
     } else {
-        return <div />;
+        return <div/>;
     }
+
     function renderEachComment(comment: Comment) {
         return (
             <ul key={comment.id} className="list-unstyled">
@@ -29,26 +33,43 @@ export default function Dishdetail(props: any) {
         }
     }
 
-    function renderDish(dish: Dish) {
-        if (dish != null) {
+    function renderDish(dish: Dish, comments: Comment[]) {
+        if (dish && comments) {
             return (
-                <>
-                    <Card className="col-12 col-md-5 m-1">
-                        <CardImg top src={dish.image} alt={dish.name} />
-                        <CardBody>
-                            <CardTitle>{dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
-                        </CardBody>
-                    </Card>
-                    <Card className="col-12 col-md-5 m-1">
-                        <CardTitle>
-                            <h4>Comments</h4>
-                        </CardTitle>
-                        <CardBody></CardBody>
-                    </Card>
-                </>
+                <Container>
+                    <Row>
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to="/home">Home</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <Link to="/menu">Menu</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>{dish.name}</h3>
+                            <hr />
+                        </div>
+                    </Row>
+                    <Row>
+                        <Card className="col-12 col-md-5 m-1">
+                            <CardImg top src={dish.image} alt={dish.name} />
+                            <CardBody>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                        <Card className="col-12 col-md-5 m-1">
+                            <CardTitle>
+                                <h4>Comments</h4>
+                            </CardTitle>
+                            <CardBody>{renderComments(comments)}</CardBody>
+                        </Card>
+                    </Row>
+                </Container>
             );
         }
-        return <div />;
+        return <div/>;
     }
 }
