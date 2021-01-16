@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72ce7590-e39b-4222-99d1-eb51abfd37f0" name="Default Changelist" comment="Added SPA 1">
-      <change afterPath="$PROJECT_DIR$/src/components/AboutUsComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/configureStore.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/reducer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ContactComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DishdetailComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DishdetailComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/HeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HomeComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MainComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MenuComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MenuComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +57,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.postfix.templates" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -154,7 +156,15 @@
       <workItem from="1609833365080" duration="10830000" />
       <workItem from="1609847519012" duration="7485000" />
       <workItem from="1609988984784" duration="2598000" />
-      <workItem from="1610182370164" duration="14502000" />
+      <workItem from="1610182370164" duration="16330000" />
+      <workItem from="1610360529521" duration="1351000" />
+      <workItem from="1610509783474" duration="1061000" />
+      <workItem from="1610605901191" duration="414000" />
+      <workItem from="1610634350035" duration="753000" />
+      <workItem from="1610639966773" duration="532000" />
+      <workItem from="1610724175122" duration="172000" />
+      <workItem from="1610739025468" duration="414000" />
+      <workItem from="1610806007633" duration="6400000" />
     </task>
     <task id="LOCAL-00001" summary="first commit and menu component">
       <created>1609832284858</created>

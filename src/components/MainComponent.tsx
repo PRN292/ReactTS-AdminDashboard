@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import Menu from "./MenuComponent";
-import { DISHES } from "./shared/dishes";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
 import { Switch, Redirect, Route } from "react-router";
 import Contact from "./ContactComponent";
-import { PROMOTIONS } from "./shared/promos";
-import { LEADERS } from "./shared/leaders";
 import Dishdetail from "./DishdetailComponent";
-import {COMMENTS} from "./shared/comments";
+import About from "./AboutUsComponent";
+import {connect, RootStateOrAny, useDispatch, useSelector} from "react-redux";
+import { withRouter } from 'react-router-dom';
 import Dish from "./shared/dish";
 import Promotion from "./shared/promotion";
 import Leader from "./shared/leader";
 import Comment from "./shared/comment";
-import About from "./AboutUsComponent";
 
 export default function Main() {
-    const [dishes] = useState<Dish[]>(DISHES);
-    const [promotions] = useState<Promotion[]>(PROMOTIONS);
-    const [leaders] = useState<Leader[]>(LEADERS);
-    const [comments] = useState<Comment[]>(COMMENTS);
+    const dishes: Dish[] = useSelector((state: RootStateOrAny) => state.dishes);
+    const comments: Comment[] = useSelector((state: RootStateOrAny) => state.comments);
+    const leaders: Leader[] = useSelector((state: RootStateOrAny) => state.leaders);
+    const promotions: Promotion[] = useSelector((state: RootStateOrAny) => state.promotions);
+    const dispatch = useDispatch();
 
     const HomePage = () => {
         return (
@@ -35,8 +34,10 @@ export default function Main() {
     const DishWithId = ({ match }: any) => {
         const dishId: number = parseInt(match.params.dishId, 10);
         return (
-            <Dishdetail dish={dishes.filter((dish) => dish.id === dishId)[0]}
-                        comments={comments.filter((comment) => comment.dishId === dishId)}/>
+            <Dishdetail
+                dish={dishes.filter((dish: Dish) => dish.id === dishId)[0]}
+                comments={comments.filter((comment: Comment) => comment.dishId === dishId)}
+            />
         );
     };
 
@@ -45,10 +46,10 @@ export default function Main() {
             <Header />
             <Switch>
                 <Route path="/home" component={HomePage} />
-                <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
+                <Route exact path="/menu" component={(props: any) => <Menu dishes={dishes} />} />
                 <Route path="/menu/:dishId" component={DishWithId} />
                 <Route exact path="/contactus" component={Contact} />
-                <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
+                <Route exact path="/aboutus" component={(props: any) => <About leaders={leaders} />} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />
