@@ -3,6 +3,7 @@ import Dish from "./shared/dish";
 import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle, Container, NavLink, Row} from "reactstrap";
 import Comment from "./shared/comment";
 import {Link} from "react-router-dom";
+import CommentForm from "./CommentForm";
 
 export default function Dishdetail(props: any) {
     const dish: Dish = props.dish;
@@ -64,7 +65,10 @@ export default function Dishdetail(props: any) {
                             <CardTitle>
                                 <h4>Comments</h4>
                             </CardTitle>
-                            <CardBody>{renderComments(comments)}</CardBody>
+                            <CardBody>
+                                {renderComments(comments)}
+                                <CommentForm/>
+                            </CardBody>
                         </Card>
                     </Row>
                 </Container>
