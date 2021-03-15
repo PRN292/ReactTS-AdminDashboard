@@ -12,7 +12,8 @@ interface LoginState {
 }
 
 class Login extends React.PureComponent<any, LoginState> {
-    static contextType = authContext;
+ //   static contextType = authContext;
+
     static propTypes: any = {
         match: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,

@@ -6,9 +6,35 @@ import {ConfigureStore} from "./redux/configureStore";
 import {Provider} from "react-redux";
 import Header from "./main_components/HeaderComponent";
 import {Redirect, Route} from "react-router";
+import {ProcessImageClient, ProcessImageRequest} from "./proto/image";
+import {credentials} from "@grpc/grpc-js";
+
+/*import {ProcessImageRequest,
+    ProcessImageReply,
+    CreateEncodingRequest,
+    CreateEncodingReply,
+    DeleteEncodingRequest,
+    DeleteEncodingReply} from './proto/image_pb';
+
+import {ProcessImagePromiseClient} from './proto/image_grpc_web_pb';
+ */
+const ip = "10.1.129.71";
+const port = 50052;
+
 
 export default function App() {
+    var client = new ProcessImageClient(`http://${ip}:${port}`, credentials.createInsecure());
+    var req = new ProcessImageRequest().id;
+    var stream = client.getChannel();
+    console.log(stream);
     return (
+        <div></div>
+    );
+
+}
+
+/*
+*
         <ProvideAuth>
             <BrowserRouter>
                 <div className="App">
@@ -16,9 +42,8 @@ export default function App() {
                 </div>
             </BrowserRouter>
         </ProvideAuth>
-    );
-
-}
+*
+* */
 
 export function useAuth() {
     return useContext(authContext);
