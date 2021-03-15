@@ -1,0 +1,48 @@
+import Users from "../models/Users";
+export default class UsersService{
+    addUser(user: Users) {
+        fetch("http://localhost:50002/users", {
+            headers: {
+                "Content-Type": "application/json",
+                "Authentication": "Bearer "+window.localStorage.getItem("token")
+            },
+            method: "POST",
+            body: `{
+                "username": "${user.username}",
+                "password": "${user.password}"
+            }`
+        })
+            //MessageDTO: date, msg
+            .then(res => res.json())
+            .then(resBody => {
+                alert(`Added! Date: ${resBody.date}, Msg: ${resBody.msg}`);
+            }).catch((err) => {
+                alert("con cac");
+        });
+    }
+
+    authenticate(username: string, password: string) {
+        fetch("http://localhost:50002/login", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: `{"username": "${username}", "password": "${password}"}`
+        }).then(res => {
+            if (!res.ok) {
+                throw res;
+            }
+            res.json();
+        }).then(msg => {
+            //successfully logged in and have JWT Token
+            window.localStorage.setItem("token", msg.token);
+
+        })
+            .catch((err) => {
+            err.then((msg) => {
+                alert(msg);
+            });
+        });
+
+    }
+}

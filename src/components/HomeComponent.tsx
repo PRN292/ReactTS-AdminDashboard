@@ -17,12 +17,10 @@ export default function Home({dish , promotion , leader}: CardType) {
         <Container>
             <Row className="align-items-start">
                 <div className="col-12 col-md m-1">
-                    <HomeContext.Provider value={dish}>
                         <RenderCard />
-                    </HomeContext.Provider>
                 </div>
                 <div className="col-12 col-md m-1">
-                    <HomeContext.Provider value={promotion}>
+                    <HomeContext.Provider value={dish}>
                         <RenderCard />
                     </HomeContext.Provider>
                 </div>

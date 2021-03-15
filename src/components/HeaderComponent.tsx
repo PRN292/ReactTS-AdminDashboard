@@ -50,7 +50,9 @@ export default class Header extends React.Component<any, any> {
         this.toggleModal();
         event.preventDefault();
         // @ts-ignore
-        console.log(`Username: ${this.username.value}, Password: ${this.password.value}, Remember: ${this.remember.value}`);
+        const username = this.username.value;
+
+        //console.log(`Username: ${this.username.value}, Password: ${this.password.value}, Remember: ${this.remember.value}`);
     }
 
     render() {
