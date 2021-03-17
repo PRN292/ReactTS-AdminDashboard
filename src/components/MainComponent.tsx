@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React from "react";
 import { Switch, Redirect, Route } from "react-router";
 import Login from "../main_components/LoginComponent";
 import Header from "../main_components/HeaderComponent";
@@ -9,7 +9,6 @@ import UpdateUser from "../main_components/admin/UpdateUserAccount";
 import ViewAll from "../main_components/admin/ViewAllUser";
 import CreateKnownPerson from "../main_components/CreateKnownPerson";
 import EditOwnProfile from "../main_components/EditOwnProfile";
-import {  PrivateRoute } from "../App";
 
 export default function Main() {
     return (
@@ -17,25 +16,13 @@ export default function Main() {
             <Header />
             <Switch>
                 <Route exact path="/login" component={Login} />
-                <PrivateRoute path="/home">
-                    <Home />
-                </PrivateRoute>
-                <PrivateRoute path="/createAccount">
-                    <CreateAccount />
-                </PrivateRoute>
-                <PrivateRoute path="/updateUser">
-                    <UpdateUser />
-                </PrivateRoute>
-                <PrivateRoute path="/viewAll">
-                    <ViewAll />
-                </PrivateRoute>
-                <PrivateRoute path="/createKnownPerson">
-                    <CreateKnownPerson />
-                </PrivateRoute>
-                <PrivateRoute path="/editProfile">
-                    <EditOwnProfile />
-                </PrivateRoute>
-                <Redirect to="/login" />
+                <Route path="/home" component={Home}/>
+                <Route path="/createAccount" component={CreateAccount}/>
+                <Route path="/updateUser" component={UpdateUser}/>
+                <Route path="/viewAll" component={ViewAll}/>
+                <Route path="/createKnownPerson" component={CreateKnownPerson}/>
+                <Route path="/editProfile" component={EditOwnProfile}/>
+                <Redirect to="/login"/>
             </Switch>
             <Footer />
         </>

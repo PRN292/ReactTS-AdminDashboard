@@ -1,33 +1,35 @@
-import React, {useContext} from "react";
-import {Button, Col, Container, Form, Input, InputGroup, Row} from "reactstrap";
+import React  from "react";
+import { Button, Col, Container, InputGroup, Row } from "reactstrap";
 import LoginService from "../services/LoginService";
 import LoginStatusAlert from "./LoginStatusAlert";
 import LoginResponse from "../models/LoginResponse";
-import {authContext} from "../App";
-import PropTypes from 'prop-types';
-import {withRouter} from "react-router-dom";
+import PropTypes from "prop-types";
+import {Formik, Field, Form, FormikValues} from "formik";
 
 interface LoginState {
     loggedIn: boolean | undefined;
 }
 
-class Login extends React.PureComponent<any, LoginState> {
-    static contextType = authContext;
+interface LoginFormValues {
+    username: string;
+    password: string;
+}
+
+export default class Login extends React.PureComponent<any, LoginState> {
     static propTypes: any = {
         match: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
-        history: PropTypes.object.isRequired
-    }
+        history: PropTypes.object.isRequired,
+    };
     private loginService: LoginService = new LoginService();
-    private username!: HTMLInputElement | HTMLTextAreaElement | null;
-    private password!: HTMLInputElement | HTMLTextAreaElement | null;
+
 
     constructor(props: any) {
         super(props);
         this.state = {
             loggedIn: undefined,
         };
-        this.handleLogin = this.handleLogin.bind(this);
+        this.handleLoginFormik = this.handleLoginFormik.bind(this);
     }
 
     handleLocalStorageLogin(loginRes: LoginResponse | undefined): void {
@@ -40,12 +42,10 @@ class Login extends React.PureComponent<any, LoginState> {
         }
     }
 
-    handleLogin(e: React.FormEvent) {
-        e.preventDefault();
-        this.login();
-        /*e.preventDefault();
+
+    handleLoginFormik(values: FormikValues) {
         this.loginService
-            .authenticate(this.username?.value, this.password?.value)
+            .authenticate(values.username, values.password)
             .then((loginRes) => {
                 this.handleLocalStorageLogin(loginRes);
                 this.setState({loggedIn: true});
@@ -53,7 +53,8 @@ class Login extends React.PureComponent<any, LoginState> {
             })
             .catch((err) => {
                 this.setState({loggedIn: false});
-            });*/
+            });
+        alert(JSON.stringify(values, null, 2));
     }
 
     render() {
@@ -70,51 +71,59 @@ class Login extends React.PureComponent<any, LoginState> {
                         <div>
                             <h1 className="text-center text-primary ">Login</h1>
                             {this.state.loggedIn === false ? (
-                                <LoginStatusAlert color={"danger"} msg={"Invalid username or password"}/>
+                                <LoginStatusAlert color={"danger"} msg={"Invalid username or password"} />
                             ) : (
-                                <div/>
+                                <div />
                             )}
-                            <Form onSubmit={this.handleLogin}>
-                                <InputGroup className=" mb-3" style={{paddingRight: 100, paddingLeft: 100}}>
-                                    <div className="input-group-prepend ">
-                                        <span className="input-group-text">
-                                            <i className="fa fa-user"/>
-                                        </span>
+                            <Formik
+                                initialValues={{
+                                    username: "",
+                                    password: "",
+                                }}
+                                onSubmit={this.handleLoginFormik}
+                            >
+                                <Form>
+                                    <InputGroup className=" mb-3" style={{ paddingRight: 100, paddingLeft: 100 }}>
+                                        <div className="input-group-prepend ">
+                                            <span className="input-group-text">
+                                                <i className="fa fa-user" />
+                                            </span>
+                                        </div>
+                                        <Field
+                                            className={"form-control"}
+                                            type="text"
+                                            id="username"
+                                            name="username"
+                                            placeholder={"Username"}
+                                        />
+                                    </InputGroup>
+                                    <div className="input-group mb-3" style={{ paddingRight: 100, paddingLeft: 100 }}>
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text">
+                                                <i className="fa fa-lock" />
+                                            </span>
+                                        </div>
+                                        <Field
+                                            className={"form-control"}
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder={"Password"}
+                                        />
                                     </div>
-                                    <Input
-                                        type="text"
-                                        id="username"
-                                        name="username"
-                                        placeholder={"Username"}
-                                        innerRef={(input) => (this.username = input)}
-                                    />
-                                </InputGroup>
-                                <div className="input-group mb-3" style={{paddingRight: 100, paddingLeft: 100}}>
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">
-                                            <i className="fa fa-lock"/>
-                                        </span>
+                                    <div style={{ paddingLeft: 200 }}>
+                                        <Button
+                                            color={"primary"}
+                                            style={{ fontSize: 16 }}
+                                            type="submit"
+                                            block
+                                            className="btn-lg w-50"
+                                        >
+                                            Login
+                                        </Button>
                                     </div>
-                                    <Input
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        placeholder={"Password"}
-                                        innerRef={(input) => (this.password = input)}
-                                    />
-                                </div>
-                                <div style={{paddingLeft: 200}}>
-                                    <Button
-                                        color={"primary"}
-                                        style={{fontSize: 16}}
-                                        type="submit"
-                                        block
-                                        className="btn-lg w-50"
-                                    >
-                                        Login
-                                    </Button>
-                                </div>
-                            </Form>
+                                </Form>
+                            </Formik>
                         </div>
                     </Col>
                 </Row>
@@ -125,12 +134,9 @@ class Login extends React.PureComponent<any, LoginState> {
     login() {
         const { match, location, history } = this.props;
         const { auth } = this.context;
-        let { from }: any = location.state || { from: {pathname: "/"}};
+        const { from }: any = location.state || { from: { pathname: "/" } };
         auth.signin(() => {
             history.replace(from);
         });
-
     }
 }
-
-export default withRouter(Login);
