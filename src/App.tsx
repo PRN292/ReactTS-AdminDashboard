@@ -1,16 +1,10 @@
-import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import Main from "./components/MainComponent";
-import "./App.css";
-import {BrowserRouter} from "react-router-dom";
-
 
 export default function App() {
     return (
-            <BrowserRouter>
-                <div className="App">
-                    <Main/>
-                </div>
-            </BrowserRouter>
+        <BrowserRouter>
+            <Main />
+        </BrowserRouter>
     );
-
 }
