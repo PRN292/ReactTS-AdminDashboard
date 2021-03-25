@@ -2,20 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72ce7590-e39b-4222-99d1-eb51abfd37f0" name="Default Changelist" comment="Added SPA 1">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/contexts/UserContext.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/firebase.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/LoginSession.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/settings.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/strangerdetection-firebase-adminsdk-ndswy-678c270870.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/KnownPerson.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/KnownPersonService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/KnownPersonUpdateModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/EditProfileService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MainComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/UserContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/UserContext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/CreateKnownPerson.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/CreateKnownPerson.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/EditOwnProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/EditOwnProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/HomeComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/HomeComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_components/LoginComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/LoginComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/admin/FormCreateAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/admin/FormCreateAdmin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/admin/UpdateUserAccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/admin/UpdateUserAccount.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_components/admin/ViewAllUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/admin/ViewAllUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/header/AdminNavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/header/AdminNavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/header/DropdownComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/header/DropdownComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_components/header/LogoComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_components/header/LogoComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/LoginSession.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LoginSession.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/AdminSecurityService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/AdminSecurityService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/LoginService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/LoginService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/UserService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +73,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/models" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -74,12 +87,13 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/shared" />
     </key>
@@ -211,7 +225,7 @@
       <workItem from="1615970131057" duration="5982000" />
       <workItem from="1616243372685" duration="5173000" />
       <workItem from="1616419963481" duration="338000" />
-      <workItem from="1616464886644" duration="4723000" />
+      <workItem from="1616464886644" duration="38575000" />
     </task>
     <task id="LOCAL-00001" summary="first commit and menu component">
       <created>1609832284858</created>

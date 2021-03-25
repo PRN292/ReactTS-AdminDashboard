@@ -5,7 +5,7 @@ export default class HeaderLogo extends React.PureComponent<any, any> {
     render() {
         return (
             <h2 style={{ paddingLeft: 10 }} className="navbar-text text-primary">
-                Stranger Detectiond
+                Stranger Detection
             </h2>
         );
     }

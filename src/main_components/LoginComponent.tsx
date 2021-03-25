@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Button, Col, Container, InputGroup, Row} from "reactstrap";
 import LoginService from "../services/LoginService";
 import LoginStatusAlert from "./LoginStatusAlert";
@@ -8,6 +8,7 @@ import {Formik, Field, Form, FormikValues} from "formik";
 import LoginSession from "../models/LoginSession";
 import {useHistory} from "react-router";
 import UserContext from "../contexts/UserContext";
+import {log} from "util";
 
 interface LoginState {
     loggedIn: boolean | undefined;
@@ -24,43 +25,36 @@ export default function Login() {
     const session = React.useContext<LoginSession>(UserContext);
 
     const loginService = new LoginService();
-    const [loggedIn, setLoggedIn] = React.useState<Boolean>(false);
+    const [loggedInFailed, setLoggedInFailed] = React.useState<boolean>(false);
 
-
-    function handleLocalStorageLogin(loginRes: LoginResponse | undefined): void {
-        if (loginRes !== undefined) {
-            window.localStorage.setItem("token", loginRes.token);
-            window.localStorage.setItem("username", loginRes.username);
-            window.localStorage.setItem("address", loginRes.address);
-            window.localStorage.setItem("name", loginRes.name);
-            window.localStorage.setItem("role", loginRes.role);
+    useEffect(() => {
+        const token = window.localStorage.getItem("token");
+        if (token !== null) {
+            history.replace("/editProfile");
         }
-    }
-
+    },[]);
 
     function handleLoginFormik(values: FormikValues) {
-        session.username = "admin";
-
-        history.push("/editProfile");
-        return;
         loginService
             .authenticate(values.username, values.password)
             .then((loginRes) => {
-                handleLocalStorageLogin(loginRes);
-                setLoggedIn(true);
-                //     props.history.push("/home");
+                session.username = loginRes?.name;
+                window.localStorage.setItem("token", loginRes?.token as string);
+                window.localStorage.setItem("username", loginRes?.name as string);
+                window.localStorage.setItem("fullName", loginRes?.username as string);
+                window.localStorage.setItem("address", loginRes?.address as string);
+
+                history.push("/home");
             })
-            .catch((err) => {
-                setLoggedIn(false);
+            .catch((err: Promise<any>) => {
+                err.then(() => {
+                    // @ts-ignore
+                    swal("Failed!", "Invalid username or password", "error");
+                });
             });
-        alert(JSON.stringify(values, null, 2));
-
-        alert(session?.username);
-
     }
 
 
-    // @ts-ignore
     // @ts-ignore
     return (
         <Container fluid style={{paddingTop: 100}}>
@@ -74,7 +68,7 @@ export default function Login() {
                 <Col md={5} className="bg-white-shadow">
                     <div>
                         <h1 className="text-center text-primary ">Login</h1>
-                        {!loggedIn ? (
+                        {loggedInFailed ? (
                             <LoginStatusAlert color={"danger"} msg={"Invalid username or password"}/>
                         ) : (
                             <div/>

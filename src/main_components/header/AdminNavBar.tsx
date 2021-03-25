@@ -7,7 +7,6 @@ export default class AdminNavBar extends React.Component<any, any> {
     render() {
         return (
             <>
-                <HeaderSearch /> <HeaderNotification />
                 <HeaderDropdown />
             </>
         );

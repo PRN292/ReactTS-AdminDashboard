@@ -1,4 +1,6 @@
 import Users from "../models/Users";
+import KnownPerson from "../models/KnownPerson";
+import {api, knownPersons} from "../api";
 
 export default class UserService {
     async addUser(user: Users): Promise<Users | undefined> {
@@ -37,6 +39,18 @@ export default class UserService {
             method: "PATCH ",
         }).then((res) => {
             return res.status;
+        });
+    }
+
+    async addKnownPerson(knownPerson: KnownPerson) {
+        return fetch(api + knownPersons, {
+            method: "POST",
+            // @ts-ignore
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer: " + window.localStorage.getItem("token")
+            },
+            body: JSON.stringify(knownPerson),
         });
     }
 }

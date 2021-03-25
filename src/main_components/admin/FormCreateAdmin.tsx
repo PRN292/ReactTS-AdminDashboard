@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, InputGroup } from "reactstrap";
 import { AdminSecurityService } from "../../services/AdminSecurityService";
 import NewAccount from "../../models/NewAccount";
+import swal from "sweetalert";
 
 export default class FormCreateAdmin extends React.PureComponent {
     private adminSecurityService: AdminSecurityService = new AdminSecurityService();
@@ -21,7 +22,7 @@ export default class FormCreateAdmin extends React.PureComponent {
 
     handleCreateNewAdmin(e: React.FormEvent) {
         e.preventDefault();
-        this.adminSecurityService.createNewService(
+        const result = this.adminSecurityService.createNewService(
             new NewAccount(
                 this.username?.value,
                 this.role,
@@ -33,12 +34,17 @@ export default class FormCreateAdmin extends React.PureComponent {
                 this.fullName?.value
             )
         );
+        if (result === undefined) {
+            swal("Failed!", "Failed to create admin security account!", "error");
+        } else {
+            swal("Success!", "Successfully created admin security account!", "success");
+        }
     }
 
     render() {
         return (
             <div className="col-6">
-                <Form method="post" id="createNewFrm" className="form">
+                <Form onSubmit={this.handleCreateNewAdmin} className="form">
                     <img
                         src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
                         className="img-thumbnail center-block"

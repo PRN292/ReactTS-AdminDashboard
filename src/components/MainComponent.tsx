@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {
     Switch,
     Route,
-    Redirect,
+    Redirect, useParams,
 } from "react-router-dom";
 import Login from "../main_components/LoginComponent";
 import Header from "../main_components/HeaderComponent";
@@ -15,9 +15,16 @@ import CreateKnownPerson from "../main_components/CreateKnownPerson";
 import EditOwnProfile from "../main_components/EditOwnProfile";
 import UserContext, {UserProvider} from "../contexts/UserContext";
 import LoginSession from "../models/LoginSession";
+import UpdateUserAccount from "../main_components/admin/UpdateUserAccount";
 
 export default function Main() {
-    const [user, setUser] = React.useState<LoginSession>(new LoginSession(undefined, undefined));
+    const [user, setUser] = React.useState<LoginSession>(new LoginSession(undefined, undefined, undefined, undefined, undefined));
+
+   const UpdateKnownPersonWithEmail = ({match}:any) => {
+       // @ts-ignore
+       const {email}: string = useParams();
+       return <UpdateUserAccount email={email}/>
+    }
     return (
         <UserProvider value={user}>
             <>
@@ -44,6 +51,9 @@ export default function Main() {
                     <PrivateRoute path="/editProfile">
                         <EditOwnProfile/>
                     </PrivateRoute>
+                    <PrivateRoute path={"/updateKnownPerson/:email"}>
+                        <UpdateKnownPersonWithEmail />
+                    </PrivateRoute>
                     <Redirect to="/login"/>
                 </Switch>
                 <Footer/>
@@ -60,7 +70,7 @@ export default function Main() {
             <Route
                 {...rest}
                 render={({location}) =>
-                    session?.username ? (
+                    window.localStorage.getItem("token") !== null ? (
                         children
                     ) : (
                         <Redirect

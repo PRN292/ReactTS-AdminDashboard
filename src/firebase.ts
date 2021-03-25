@@ -19,7 +19,7 @@ export const getToken = (setTokenFound: any) => {
         .getToken({
             vapidKey: "BAUgEVaworvhBvIw-oGf5VK1RYsbx5Dx85qQ3HsMaogzMgv_oq3-XD0kQHQeEU7EbVCJK2cRGDgbV_vcWC0JU6I",
         })
-        .then((currentToken) => {
+        .then((currentToken: any) => {
             if (currentToken) {
                 console.log("current token for client: ", currentToken);
                 setTokenFound(true);
@@ -31,7 +31,7 @@ export const getToken = (setTokenFound: any) => {
                 // shows on the UI that permission is required
             }
         })
-        .catch((err) => {
+        .catch((err: any) => {
             console.log("An error occurred while retrieving token. ", err);
             // catch error while creating client token
         });
@@ -39,7 +39,7 @@ export const getToken = (setTokenFound: any) => {
 
 export const onMessageListener = () =>
     new Promise((resolve) => {
-        messaging.onMessage((payload) => {
+        messaging.onMessage((payload: any) => {
             resolve(payload);
         });
     });
